@@ -1,0 +1,11 @@
+Package: CVrepGPAcalc
+Type: Package
+Title: Generates low density SNP panels and calculates genomic prediction accuracy from multiple cross-validations
+Version: 0.1.0
+Author: Smaragda Tsairidou
+Maintainer: Smaragda Tsairidou <Smaragda.Tsairidou@roslin.ed.ac.uk>
+Description: Generates low density SNP panels and performs multiple cross-validation iterations for the calculation of genomic prediction accuracies using genomic data
+Depends: R (>= 3.1.2) 
+License: GNU GENERAL PUBLIC LICENSE
+Encoding: UTF-8
+LazyData: true
