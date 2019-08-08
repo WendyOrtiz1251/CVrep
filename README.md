@@ -9,23 +9,23 @@ Description:
 Selects SNPs to create low density SNP panels. SNPs can be selected folowing different methods and a number of SNP panel replicates can be generated for each density (see Options).
 
 Usage:
-CreateLDdata(filename="scottish_genotypes3.tped", nreps=2, method=2, denstart=200, denend=500, step=100)
-CreateLDdata(filename="scottish_genotypes3.tped", nreps=2, method=3, denstart=200, denend=500, step=100, gen_len=2240.19, chr_len_file="Chr_len.txt")
-CreateLDdata(filename="scottish_genotypes3.tped", method=4, stepstart=5000000, stepend=9000000, step=2000000)
+CreateLDdata(filename="genotypes.tped", nreps=2, method=2, denstart=200, denend=500, step=100)
+CreateLDdata(filename="genotypes.tped", nreps=2, method=3, denstart=200, denend=500, step=100, gen_len=2240.19, chr_len_file="Chr_len.txt")
+CreateLDdata(filename="genotypes.tped", method=4, stepstart=5000000, stepend=9000000, step=2000000)
 
 Requirements:
 The input file is a plink '.tped' data file. 
-For method 3, “chr_len_file” is an input '.txt' file with two columns, where column one is the chromosome, column 2 is the chromosome name, and column three is the chromosome length. Chromosome length can be given either in Mbp or centimorgans. 
+For method 3, “chr_len_file” is an input '.txt' file with two columns, where column one is the chromosome, column two is the chromosome name, and column three is the chromosome length. Chromosome length can be given either in Mbp or centimorgans. 
 
 Options:
 If “method=1” (default), then SNPs are selected by random sampling across the entire genome, where the SNPs selected in the different replicates may overlap by chance.
-If “method=2”, then LD SNP panels are created with random sampling across the genome, but replicates are non-overlapping. 
+If “method=2”, then low density SNP panels are created with random sampling across the genome, but replicates are non-overlapping. 
 If “method=3”, then SNPs are sampled randomly within each chromosome but proportionally to the chromosome length. This method also generates a “snp_count.txt” file where the exact number of SNPs sampled from each chromosome is recorded.  
-If “method=4”, then SNPs are selected based on their physical (or genetic) distance for pre-defined step sizes.  For example, if stepstart=1000000, stepend=11000000, and step=2000000, then it will generate datasets where the gap between selected SNPs will be 1,3,5 Mbp etc until 11Mbp. This method generates no replicates. This method always selects the first and the last SNP on each chromosome. This method also generates a “snp_count.txt” file where the exact number of SNPs sampled from each chromosome is recorded.
+If “method=4”, then SNPs are selected based on their physical (or genetic) distance for pre-defined step sizes. For example, if stepstart=1000000, stepend=11000000, and step=2000000, then it will generate datasets where the gap between selected SNPs will be 1,3,5 Mbp etc until 11Mbp. This method generates no replicates. This method always selects the first and the last SNP on each chromosome. This method also generates a “snp_count.txt” file where the exact number of SNPs sampled from each chromosome is recorded.
 
 Other arguments:
 “nreps” is the number of sampling replicates for each density. 
-“denstart” and “denend” are the starting (lowest) and the highest densities that will sample for as chosen by the user. For example, if denstart=100, denend=1000, and step=100, then the function samples densities of 100, 200, 300, 400 etc until 1000 SNPs. 
+“denstart” and “denend” are the starting (lowest) and the highest densities that will sample for, as chosen by the user. For example, if denstart=100, denend=1000, and step=100, then the function samples densities of 100, 200, 300, 400 etc. until 1000 SNPs. 
 “step” is either the step by which the densities increase for method 3 (see “denstart” and “denend” above), or the SNP distance step size for method 4.
 “gen_len” is the genome length if using method 3. 
 
@@ -45,10 +45,10 @@ Description:
 Randomises individuals and partitions into cross-validation groups. It repeats the process for a number of times, where each time different individuals are allocated into different cross-validation groups.
 
 Usage:
-createCVgroups("Phenotypes_for_CV.dat", nreps, multiPhenoFiles=F, PhenoHeader=T)
+createCVgroups(datafile, ngroups, nreps, multiPhenoFiles=F, PhenoHeader=T)
  
 Output:
-It saves phenotype output datafiles (see Options) where the last column shows the allocated group number, and saves R work space which to be used by function “calcAccur” (see below). 
+It saves phenotype output datafiles (see Options) where the last column shows the allocated group number, and saves R workspace to be used by function “calcAccur” (see below). 
 
 Options: 
 If “multiPhenoFiles=F” (default), a single phenotype file is produced for each replicate where the last column indicates the allocated cross-validation group number (phenotypes_grp_nrep#.txt). 
@@ -70,19 +70,18 @@ createCVgroups("Phenotypes_for_CV.dat", nreps=10, multiPhenoFiles=F, PhenoHeader
 3.	“CalcAccur” 
 
 Description:
-It calculates correlations between the trait value and the predicted breeding values, 
-using the output files from ASReml analysis. It calculates the genomic prediction accuracies (see Options). Creates ASReml status report file.
+It calculates correlations between the trait value and the predicted breeding values, using the output files from ASReml analysis. It calculates the genomic prediction accuracies (see Options). Creates ASReml status report file.
 
 Usage:
 calcAccur(ngroups, nreps, skipnum, genomichh=T, h2)
 
 Options:
 If “genomichh=F” (default), it uses the heritability from each cross-validation fold to calculate the accuracy
-If “genomichh=T”, the user also needs to provide the genomic heritability (argument “h2”). The accuracy is calculated  by dividing with the genomic heritability. 
+If “genomichh=T”, the user also needs to provide the genomic heritability (argument “h2”), so that the accuracy is calculated  by dividing with the square root of the genomic heritability. 
 
 Other arguments:
 “Groups” is the number of cross validation groups
-“skipnum” is the number of lines to skip when reading the ASReml “.sln” files (depends on the number of fixed effects in the model and the number of their levels in the data) 
+“skipnum” is the number of lines to skip when reading the ASReml “.sln” files (depends on the number of fixed effects in the model and the number of their levels in the data). 
 
 Requirements: 
 It loads the R workspace saved from function “CreateCVgroups”.
