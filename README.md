@@ -35,7 +35,9 @@ Generates a SNP count file with the step used and the number of SNPs selected (s
 
 Examples:
 CreateLDdata(filename="genotypes.tped", nreps=3, method=1, denstart=200, denend=500, step=100)
+
 CreateLDdata(filename="genotypes.tped", nreps=3, method=3, denstart=200, denend=500, step=100, gen_len=2240.19, chr_len_file="Chr_len.txt")
+
 CreateLDdata(filename="genotypes.tped", method=4, stepstart=5000000, stepend=9000000, step=2000000)
 
 
