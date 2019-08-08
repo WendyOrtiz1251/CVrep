@@ -96,3 +96,4 @@ Generates file only with mean correlation, heritability and accuracy for each re
 Example:
 calcAccur(ngroups=5, nreps=10, skipnum=4, genomichh=F)
 
+
