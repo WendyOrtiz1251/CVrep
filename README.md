@@ -10,6 +10,7 @@ Selects SNPs to create low density SNP panels. SNPs can be selected folowing dif
 
 Usage:
 CreateLDdata(filename, nreps, method, denstart, denend, step, gen_len, chr_len_file)
+
 CreateLDdata(filename, method, stepstart, stepend, step)
 
 Requirements:
