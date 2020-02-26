@@ -1,5 +1,6 @@
 CVrep
 Package developed by Smaragda Tsairidou (Tsairidou et al. 2014, Tsairidou et al. 2019)
+https://zenodo.org/badge/latestdoi/190372314 
 
 This package can be used to generate low density SNP panels and to perform multiple cross-validation iterations for the calculation of genomic prediction accuracies using genomic data. The package contains 3 functions:
 
