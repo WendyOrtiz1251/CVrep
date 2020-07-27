@@ -63,7 +63,7 @@ Other arguments:
 If “PhenoHeader=T” (default) output phenotypic files have headers (set by the user ). 
 
 Requirements: 
-In the phenotypic data file the first column must be the recoded id so that it starts from 1 and increases to the total number of individuals (rows) in the datafile. 
+In the phenotypic data file the first column must be the recoded id so that it matches the order of individuals/samples in the genomic relationship matrix. 
 In the phenotypic data file the second column must contain the phenotype trait value, i.e. the phenotype with which we will calculate the correlation (and accuracy) with the predicted breeding values (see function “calcAccur” below). 
 
 Example:
